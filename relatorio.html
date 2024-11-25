@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="relatorios.css">
+</head>
+<body>
+  <h1>Relatório de Impacto Ambiental</h1>
+
+  <!-- Gráfico de separação -->
+  <canvas id="graficoRelatorio" width="400" height="200"></canvas>
+
+  <!-- Tabela de resumo -->
+  <table border="1" id="tabela-resumo">
+    <thead>
+      <tr>
+        <th>Tipo de Resíduo</th>
+        <th>Quantidade Total Processada (kg)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Plástico</td>
+        <td id="total-plastico">0</td>
+      </tr>
+      <tr>
+        <td>Metal</td>
+        <td id="total-metal">0</td>
+      </tr>
+      <tr>
+        <td>Papel</td>
+        <td id="total-papel">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Tabela de histórico -->
+  <h2>Histórico de Entradas</h2>
+  <table border="1" id="tabela-historico">
+    <thead>
+      <tr>
+        <th>Tipo de Resíduo</th>
+        <th>Quantidade (kg)</th>
+        <th>Data/Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Histórico dinâmico será inserido aqui -->
+    </tbody>
+  </table>
+
+  <!-- Botão de exportar -->
+  <button id="exportarPDF">Exportar para PDF</button>
+
+  <script>
+    // Dados iniciais
+    const dadosTotais = {
+      "Plástico": 0,
+      "Metal": 0,
+      "Papel": 0
+    };
+
+    const historico = [];
+
+    // Elementos do DOM
+    const totalPlastico = document.getElementById("total-plastico");
+    const totalMetal = document.getElementById("total-metal");
+    const totalPapel = document.getElementById("total-papel");
+    const tabelaHistorico = document.getElementById("tabela-historico").querySelector("tbody");
+
+    // Configuração do gráfico
+    const ctx = document.getElementById("graficoRelatorio").getContext("2d");
+    const graficoRelatorio = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Plástico", "Metal", "Papel"],
+        datasets: [{
+          label: "Quantidade Total Processada (kg)",
+          data: [dadosTotais["Plástico"], dadosTotais["Metal"], dadosTotais["Papel"]],
+          backgroundColor: ["#ff9999", "#9999ff", "#99ff99"],
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Atualiza tabela e gráfico
+    function atualizarDados(tipo, quantidade) {
+      // Atualiza os totais
+      dadosTotais[tipo] += quantidade;
+
+      // Atualiza a tabela de resumo
+      totalPlastico.textContent = dadosTotais["Plástico"];
+      totalMetal.textContent = dadosTotais["Metal"];
+      totalPapel.textContent = dadosTotais["Papel"];
+
+      // Atualiza o gráfico
+      graficoRelatorio.data.datasets[0].data = [
+        dadosTotais["Plástico"],
+        dadosTotais["Metal"],
+        dadosTotais["Papel"]
+      ];
+      graficoRelatorio.update();
+
+      // Adiciona ao histórico
+      const dataHora = new Date().toLocaleString();
+      historico.push({ tipo, quantidade, dataHora });
+
+      // Atualiza a tabela de histórico
+      const novaLinha = document.createElement("tr");
+      novaLinha.innerHTML = `
+        <td>${tipo}</td>
+        <td>${quantidade} kg</td>
+        <td>${dataHora}</td>
+      `;
+      tabelaHistorico.appendChild(novaLinha);
+    }
+
+    // Simula a entrada de resíduos
+    function adicionarEntrada() {
+      const tipos = ["Plástico", "Metal", "Papel"];
+      const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
+      const quantidade = Math.floor(Math.random() * 5) + 1; // Quantidade aleatória entre 1 e 5
+
+      atualizarDados(tipoAleatorio, quantidade);
+    }
+
+    // Exporta para PDF
+    document.getElementById("exportarPDF").addEventListener("click", async () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Adiciona título
+      doc.setFontSize(18);
+      doc.text("Relatório de Impacto Ambiental", 10, 10);
+
+      // Adiciona o gráfico ao PDF
+      const graficoImagem = graficoRelatorio.toBase64Image();
+      doc.addImage(graficoImagem, "PNG", 10, 20, 180, 90);
+
+      // Adiciona resumo dos dados
+      doc.setFontSize(12);
+      doc.text("Resumo de Processamento:", 10, 120);
+      let y = 130;
+      for (const tipo in dadosTotais) {
+        doc.text(`${tipo}: ${dadosTotais[tipo]} kg`, 10, y);
+        y += 10;
+      }
+
+      // Adiciona histórico
+      doc.text("Histórico de Entradas:", 10, y + 10);
+      let yTable = y + 20;
+      historico.forEach((item, index) => {
+        doc.text(`${index + 1}. ${item.tipo} - ${item.quantidade} kg - ${item.dataHora}`, 10, yTable);
+        yTable += 10;
+      });
+
+      // Salva o PDF
+      doc.save("relatorio-impacto-ambiental.pdf");
+    });
+
+    // Simula novas entradas a cada 5 segundos
+    setInterval(adicionarEntrada, 5000);
+  </script>
+</body>
+</html>

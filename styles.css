@@ -1,0 +1,74 @@
+/* Reset básico */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo global */
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #444;
+  }
+  
+  /* Legenda */
+  .legenda {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .item {
+    margin: 0 15px;
+    text-align: center;
+  }
+  
+  .item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+  
+  /* Esteira */
+  .esteira {
+    background-color: #ddd;
+    height: 80px;
+    margin: 20px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  #lista-residuos {
+    display: flex;
+    gap: 10px;
+    animation: moveEsteira 2s linear infinite;
+  }
+  
+  .icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+  
+  /* Animação para dar efeito na esteira */
+  @keyframes moveEsteira {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-10%);
+    }
+  }
+  

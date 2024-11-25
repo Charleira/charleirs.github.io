@@ -1,0 +1,45 @@
+/* monitoramento.css */
+
+/* Estilo global */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #444;
+  }
+  
+  /* Tabela de monitoramento */
+  table {
+    width: 60%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Gráfico */
+  canvas {
+    margin: 20px auto;
+    display: block;
+  }
+  

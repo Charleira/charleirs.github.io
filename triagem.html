@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triagem Automática</title>
+  <link rel="stylesheet" href="triagem-automatica.css">
+</head>
+<body>
+  <h1>Triagem Automática</h1>
+
+  <!-- Área para características dos itens -->
+  <div class="caracteristicas">
+    <h2>Características do Item</h2>
+    <div id="descricao-item">Aguardando...</div>
+  </div>
+
+  <!-- Esteira com robôs -->
+  <div class="esteira">
+    <div class="braco-robotico">🤖</div>
+    <div class="braco-robotico">🤖</div>
+  </div>
+
+  <!-- Recipientes para separação -->
+  <div class="recipientes">
+    <div class="recipiente plastico">
+      <h3>Plástico</h3>
+      <div id="lista-plastico"></div>
+    </div>
+    <div class="recipiente metal">
+      <h3>Metal</h3>
+      <div id="lista-metal"></div>
+    </div>
+    <div class="recipiente papel">
+      <h3>Papel</h3>
+      <div id="lista-papel"></div>
+    </div>
+  </div>
+
+  <script>
+    // Lista de características dos itens
+    const itens = [
+      { tipo: "Plástico", descricao: "Leve, flexível, baixa densidade." },
+      { tipo: "Metal", descricao: "Pesado, rígido, alta condutividade térmica." },
+      { tipo: "Papel", descricao: "Leve, dobrável, alta absorção de água." },
+    ];
+
+    const descricaoItem = document.getElementById("descricao-item");
+    const listaPlastico = document.getElementById("lista-plastico");
+    const listaMetal = document.getElementById("lista-metal");
+    const listaPapel = document.getElementById("lista-papel");
+
+    function processarItem() {
+      // Seleciona um item aleatório
+      const item = itens[Math.floor(Math.random() * itens.length)];
+
+      // Mostra a descrição do item na parte superior
+      descricaoItem.textContent = `${item.tipo}: ${item.descricao}`;
+
+      // Adiciona o item ao recipiente correto
+      const div = document.createElement("div");
+      div.className = "item-classificado";
+      div.textContent = item.tipo;
+
+      if (item.tipo === "Plástico") {
+        listaPlastico.appendChild(div);
+      } else if (item.tipo === "Metal") {
+        listaMetal.appendChild(div);
+      } else if (item.tipo === "Papel") {
+        listaPapel.appendChild(div);
+      }
+    }
+
+    // Processa um novo item a cada 3 segundos
+    setInterval(processarItem, 3000);
+  </script>
+</body>
+</html>

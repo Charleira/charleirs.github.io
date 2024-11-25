@@ -1,0 +1,93 @@
+/* triagem-automatica.css */
+
+/* Estilo global */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #444;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+  /* Área de características */
+  .caracteristicas {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  #descricao-item {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  /* Esteira */
+  .esteira {
+    background-color: #ddd;
+    height: 80px;
+    margin: 20px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .braco-robotico {
+    font-size: 2rem;
+    margin: 0 10px;
+  }
+  
+  /* Recipientes */
+  .recipientes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .recipiente {
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recipiente.plastico {
+    background-color: #ff9999;
+  }
+  
+  .recipiente.metal {
+    background-color: #9999ff;
+  }
+  
+  .recipiente.papel {
+    background-color: #99ff99;
+  }
+  
+  .item-classificado {
+    background-color: #fff;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+  }
+  

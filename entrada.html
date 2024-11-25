@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrada de Resíduos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Entrada de Resíduos</h1>
+
+  <!-- Legenda com ícones -->
+  <div class="legenda">
+    <div class="item">
+      <img src="plastic-icon.png" alt="Plástico" class="icon">
+      <p>Plástico</p>
+    </div>
+    <div class="item">
+      <img src="metal-icon.png" alt="Metal" class="icon">
+      <p>Metal</p>
+    </div>
+    <div class="item">
+      <img src="paper-icon.png" alt="Papel" class="icon">
+      <p>Papel</p>
+    </div>
+  </div>
+
+  <!-- Esteira -->
+  <div class="esteira">
+    <div id="lista-residuos">
+      <!-- Ícones dinâmicos inseridos aqui -->
+    </div>
+  </div>
+
+  <script>
+    // Simulação de entrada de itens
+    const listaResiduos = document.getElementById("lista-residuos");
+
+    // Adiciona itens dinamicamente na esteira
+    const itens = [
+      { icon: "plastic-icon.png", label: "Plástico" },
+      { icon: "metal-icon.png", label: "Metal" },
+      { icon: "paper-icon.png", label: "Papel" },
+    ];
+
+    function adicionarItem() {
+      const randomItem = itens[Math.floor(Math.random() * itens.length)];
+      const img = document.createElement("img");
+      img.src = randomItem.icon;
+      img.alt = randomItem.label;
+      img.className = "icon";
+      listaResiduos.appendChild(img);
+
+      // Limita o número de itens na esteira
+      if (listaResiduos.children.length > 10) {
+        listaResiduos.removeChild(listaResiduos.firstChild);
+      }
+    }
+
+    // Adiciona um novo item a cada 2 segundos
+    setInterval(adicionarItem, 2000);
+  </script>
+</body>
+</html>

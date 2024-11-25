@@ -1,0 +1,67 @@
+/* relatorios.css */
+
+/* Estilo global */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #444;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    margin-top: 30px;
+    color: #333;
+  }
+  
+  /* Tabelas */
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Gráfico */
+  canvas {
+    margin: 20px auto;
+    display: block;
+  }
+  
+  /* Botão de exportar */
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

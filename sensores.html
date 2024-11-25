@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identificação por Sensores</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Identificação por Sensores</h1>
+
+  <!-- Ícone do Sensor -->
+  <div class="sensor-container">
+    <img src="camera-icon.png" alt="Câmera" class="icon">
+    <p>Sensores identificam materiais com base em propriedades físicas e químicas.</p>
+  </div>
+
+  <!-- Legenda com características -->
+  <div class="legenda">
+    <div class="item">
+      <p><strong>Plástico:</strong> Leve, flexível, baixa densidade.</p>
+    </div>
+    <div class="item">
+      <p><strong>Metal:</strong> Pesado, rígido, alta condutividade térmica.</p>
+    </div>
+    <div class="item">
+      <p><strong>Papel:</strong> Leve, dobrável, alta absorção de água.</p>
+    </div>
+  </div>
+
+  <!-- Esteira -->
+  <div class="esteira">
+    <div id="lista-caracteristicas">
+      <!-- Características dinâmicas adicionadas aqui -->
+    </div>
+  </div>
+
+  <script>
+    // Lista de características de materiais
+    const caracteristicas = [
+      { tipo: "Plástico", descricao: "Leve, flexível, baixa densidade." },
+      { tipo: "Metal", descricao: "Pesado, rígido, alta condutividade térmica." },
+      { tipo: "Papel", descricao: "Leve, dobrável, alta absorção de água." },
+    ];
+
+    const listaCaracteristicas = document.getElementById("lista-caracteristicas");
+
+    function adicionarCaracteristica() {
+      // Seleciona uma característica aleatória
+      const item = caracteristicas[Math.floor(Math.random() * caracteristicas.length)];
+
+      // Cria um elemento de texto para a característica
+      const div = document.createElement("div");
+      div.className = "caracteristica-item";
+      div.textContent = `${item.tipo}: ${item.descricao}`;
+
+      // Adiciona a característica na lista
+      listaCaracteristicas.appendChild(div);
+
+      // Remove o item mais antigo, se a lista ultrapassar 5 elementos
+      if (listaCaracteristicas.children.length > 5) {
+        listaCaracteristicas.removeChild(listaCaracteristicas.firstChild);
+      }
+    }
+
+    // Adiciona uma nova característica a cada 2 segundos
+    setInterval(adicionarCaracteristica, 2000);
+  </script>
+</body>
+</html>
